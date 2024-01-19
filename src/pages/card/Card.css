@@ -1,0 +1,8 @@
+.Card-container {
+	background-color: rgb(245, 235, 105);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 70vh;
+	padding: 10px 0;
+}

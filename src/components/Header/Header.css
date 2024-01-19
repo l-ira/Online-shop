@@ -1,0 +1,25 @@
+.Header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 100vw;
+	min-height: 10vh;
+	background-color: rgb(93, 176, 187);
+	padding-right: 15px;
+}
+
+.Main-btn {
+	background-color: beige;
+	font-size: 16px;
+	padding: 10px 20px;
+	margin: 0 20px;
+}
+
+.Title-shop {
+	text-decoration: none;
+	color: rgb(46, 0, 105);
+}
+
+.Basket {
+	margin: 0 20px;
+}
