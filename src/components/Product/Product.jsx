@@ -3,14 +3,32 @@ import "./Product.css";
 import { useState } from "react";
 
 const Product = (props) => {
-	const { title, price, image, id, addProductsToBasket } = props;
+	const {
+		title,
+		price,
+		image,
+		id,
+		addProductsToBasket,
+		deleteProductsBasket,
+	} = props;
 
 	const [productCount, setProductCount] = useState(0);
 
 	const addBasket = () => {
 		setProductCount(productCount + 1);
-		const data = { id: id, title: title, price: price, count: 0 };
+		const data = { id: id, title: title, price: price, count: 1 };
 		addProductsToBasket(data);
+	};
+
+	const deleteBasket = () => {
+		productCount > 0 && setProductCount(productCount - 1);
+		// const data = {
+		// 	id: id,
+		// 	title: title,
+		// 	price: price,
+		// 	count: 0,
+		// };
+		deleteProductsBasket(id, price);
 	};
 
 	return (
@@ -21,14 +39,12 @@ const Product = (props) => {
 			<h5>${price}</h5>
 			<img height="120px" src={image} alt={title} />
 			<div className="Add-product">
-				<button className="Btn-add" onClick={addBasket}>
+				<button className="Btn-add Btn-basket" onClick={addBasket}>
 					+
 				</button>
 				<button
-					className="Btn-add"
-					onClick={() =>
-						productCount > 0 && setProductCount(productCount - 1)
-					}
+					className="Btn-delete Btn-basket"
+					onClick={deleteBasket}
 				>
 					-
 				</button>

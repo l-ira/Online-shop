@@ -5,14 +5,51 @@ import { Categories } from "../../components/Categories/Categories";
 
 const API_URL_PRODUCTS = "https://fakestoreapi.com/products";
 
-const Home = () => {
+const Home = ({ searchProduct }) => {
+	console.log("search products in Home", searchProduct);
 	const [data, setData] = useState([]);
 
 	const [basket, setBasket] = useState([]);
+	console.log("search product", searchProduct, data);
+
+	useEffect(() => {
+		const resultSearchProduct = data.filter((item) =>
+			item.title.toLowerCase().includes(searchProduct.toLowerCase())
+		);
+		console.log("result", resultSearchProduct);
+
+		if (resultSearchProduct) {
+			setData(resultSearchProduct);
+		} else {
+			setData(data);
+		}
+	}, [searchProduct]);
 
 	const addProductsToBasket = (product) => {
-		console.log("product added to basket", product);
-		setBasket([...basket, product]);
+		// console.log("product added to basket", product);
+
+		let findProductByID = basket.find((item) => item.id === product.id);
+
+		if (findProductByID) {
+			findProductByID.count++;
+			findProductByID.price += product.price;
+		} else {
+			setBasket([...basket, product]);
+		}
+
+		// console.log("findProductByID", findProductByID);
+	};
+
+	const deleteProductsBasket = (id, price) => {
+		let findProductByID = basket.find((item) => item.id === id);
+
+		if (findProductByID) {
+			findProductByID.count--;
+			findProductByID.price -= price;
+		}
+		// else {
+		// 	setBasket([...basket, product]);
+		// }
 	};
 
 	useEffect(() => {
@@ -36,6 +73,7 @@ const Home = () => {
 			image={image}
 			id={id}
 			addProductsToBasket={addProductsToBasket}
+			deleteProductsBasket={deleteProductsBasket}
 		/>
 	));
 
@@ -65,7 +103,7 @@ const Home = () => {
 
 	return (
 		<>
-			{console.log("basket", basket)};
+			{console.log("basket", basket)}
 			<div className="Home-container">
 				<Categories productsCategory={productsCategory} />
 				<div className="Product-container">
