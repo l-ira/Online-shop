@@ -8,22 +8,31 @@ const API_URL_PRODUCTS = "https://fakestoreapi.com/products";
 const Home = ({ searchProduct }) => {
 	console.log("search products in Home", searchProduct);
 	const [data, setData] = useState([]);
+	const [originalData, setOriginalData] = useState([]);
 
 	const [basket, setBasket] = useState([]);
 	console.log("search product", searchProduct, data);
 
 	useEffect(() => {
-		const resultSearchProduct = data.filter((item) =>
-			item.title.toLowerCase().includes(searchProduct.toLowerCase())
-		);
-		console.log("result", resultSearchProduct);
+		fetch(API_URL_PRODUCTS)
+			.then((res) => res.json())
+			.then((json) => {
+				setData(json);
+				setOriginalData(json); // Set the original data when the component mounts
+			});
+	}, []);
 
-		if (resultSearchProduct) {
-			setData(resultSearchProduct);
+	useEffect(() => {
+		if (searchProduct.trim() === "") {
+			setData(originalData); // Reset data to the original list of products
 		} else {
-			setData(data);
+			const resultSearchProduct = originalData.filter((item) =>
+				item.title.toLowerCase().includes(searchProduct.toLowerCase())
+			);
+			setData(resultSearchProduct);
 		}
-	}, [searchProduct]);
+	}, [searchProduct, originalData]);
+	// ... (rest of the component remains unchanged)
 
 	const addProductsToBasket = (product) => {
 		// console.log("product added to basket", product);
