@@ -1,8 +1,40 @@
 .Card-container {
-	background-color: rgb(245, 235, 105);
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	height: 70vh;
+	background-color: #fff;
+	display: grid;
+	grid-template-columns: 0.5fr 1fr;
+	align-items: center;
+	justify-items: center;
+	min-height: 30vh;
+	max-width: 80vw;
 	padding: 10px 0;
+	border-radius: 5px;
+	margin: 40px auto;
+	gap: 20px;
+}
+
+.Card-container:hover {
+	cursor: pointer;
+}
+
+.Product-img {
+	width: 180px;
+	padding: 20px 0;
+	transition: transform 0.3s ease-in-out;
+}
+
+.Product-img:hover {
+	transform: scale(1.4);
+}
+
+.Product-details {
+	display: grid;
+	grid-template-rows: 1fr 2fr auto;
+	align-items: start;
+	margin: 0 10px 0 0;
+}
+
+@media screen and (max-width: 900px) {
+	.Product-img:hover {
+		transform: none;
+	}
 }

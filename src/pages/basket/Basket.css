@@ -1,4 +1,25 @@
 .Basket-page {
-	height: 50vh;
-	background-color: rgb(164, 93, 231);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-height: 80vh;
+	width: 100vw;
+	margin: 10px 0 0 0;
+}
+
+.Basket-container {
+	display: grid;
+	width: 70vw;
+	grid-template-columns: 140px 1.5fr 50px 80px;
+	grid-template-rows: 80px;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.Product-img-basket {
+	width: 100px;
+}
+
+.Basket-page .Total-basket {
+	margin-left: 780px;
 }

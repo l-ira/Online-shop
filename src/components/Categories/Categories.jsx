@@ -31,11 +31,8 @@ export const Categories = ({ productsCategory }) => {
 		// </li>
 	));
 
-	console.log(categories);
 	return (
 		<>
-			{/* {console.log(productsCategory)} */}
-
 			<select
 				className="Category"
 				value={selectedCategory}

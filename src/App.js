@@ -13,7 +13,6 @@ function App() {
   const [searchProduct, setSearchProduct] = useState('')
 
   const searchData = (searchWord) => {
-    // console.log('searchWord', searchWord)
     setSearchProduct(searchWord)
   }
 
