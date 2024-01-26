@@ -5,7 +5,7 @@ import { Categories } from "../../components/Categories/Categories";
 
 const API_URL_PRODUCTS = "https://fakestoreapi.com/products";
 
-const Home = ({ searchProduct }) => {
+const Home = ({ searchProduct, getBasket }) => {
 	console.log("search products in Home", searchProduct);
 	const [data, setData] = useState([]);
 	const [originalData, setOriginalData] = useState([]);
@@ -45,9 +45,11 @@ const Home = ({ searchProduct }) => {
 		} else {
 			setBasket([...basket, product]);
 		}
-
-		// console.log("findProductByID", findProductByID);
 	};
+
+	useEffect(() => {
+		getBasket(basket);
+	}, [basket]);
 
 	const deleteProductsBasket = (id, price) => {
 		let findProductByID = basket.find((item) => item.id === id);
@@ -113,11 +115,9 @@ const Home = ({ searchProduct }) => {
 	return (
 		<>
 			{console.log("basket", basket)}
-			<div className="Home-container">
-				<Categories productsCategory={productsCategory} />
-				<div className="Product-container">
-					{data.length ? productsData : <h4>Loading...</h4>}
-				</div>
+			<Categories productsCategory={productsCategory} />
+			<div className="Product-container">
+				{data.length ? productsData : <h4>Loading...</h4>}
 			</div>
 		</>
 	);

@@ -16,18 +16,18 @@ const Product = (props) => {
 
 	const addBasket = () => {
 		setProductCount(productCount + 1);
-		const data = { id: id, title: title, price: price, count: 1 };
+		const data = {
+			id: id,
+			title: title,
+			price: price,
+			count: 1,
+			image: image,
+		};
 		addProductsToBasket(data);
 	};
 
 	const deleteBasket = () => {
 		productCount > 0 && setProductCount(productCount - 1);
-		// const data = {
-		// 	id: id,
-		// 	title: title,
-		// 	price: price,
-		// 	count: 0,
-		// };
 		deleteProductsBasket(id, price);
 	};
 

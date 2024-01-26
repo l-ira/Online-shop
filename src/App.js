@@ -12,20 +12,29 @@ import { useState } from 'react';
 function App() {
   const [searchProduct, setSearchProduct] = useState('')
 
+  const [basket, setBasket] = useState([])
+
   const searchData = (searchWord) => {
     // console.log('searchWord', searchWord)
     setSearchProduct(searchWord)
   }
 
+  const getBasket = (basketGetBasket) => {
+    setBasket(basketGetBasket)
+  }
 
   return (
     <>
       <Header searchData={searchData} />
-      <Routes>
-        <Route path="/" element={<Home searchProduct={searchProduct} />} />
-        <Route path="/basket" element={<Basket />} />
-        <Route path="/card/:id" element={<Card />} />
-      </Routes>
+      <div className="Home-container">
+        <Routes>
+          <Route path="/" element={<Home
+            getBasket={getBasket}
+            searchProduct={searchProduct} />} />
+          <Route path="/basket" element={<Basket basketFromApp={basket} />} />
+          <Route path="/card/:id" element={<Card />} />
+        </Routes>
+      </div>
     </>
   )
 }
