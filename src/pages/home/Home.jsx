@@ -2,28 +2,29 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Product from "../../components/Product/Product";
 import { Categories } from "../../components/Categories/Categories";
-import Basket from "../basket/Basket";
 
 const API_URL_PRODUCTS = "https://fakestoreapi.com/products";
 
 const Home = ({ searchProduct }) => {
+	console.log("search products in Home", searchProduct);
 	const [data, setData] = useState([]);
 	const [originalData, setOriginalData] = useState([]);
 
 	const [basket, setBasket] = useState([]);
+	console.log("search product", searchProduct, data);
 
 	useEffect(() => {
 		fetch(API_URL_PRODUCTS)
 			.then((res) => res.json())
 			.then((json) => {
 				setData(json);
-				setOriginalData(json);
+				setOriginalData(json); // Set the original data when the component mounts
 			});
 	}, []);
 
 	useEffect(() => {
 		if (searchProduct.trim() === "") {
-			setData(originalData);
+			setData(originalData); // Reset data to the original list of products
 		} else {
 			const resultSearchProduct = originalData.filter((item) =>
 				item.title.toLowerCase().includes(searchProduct.toLowerCase())
@@ -31,8 +32,11 @@ const Home = ({ searchProduct }) => {
 			setData(resultSearchProduct);
 		}
 	}, [searchProduct, originalData]);
+	// ... (rest of the component remains unchanged)
 
 	const addProductsToBasket = (product) => {
+		// console.log("product added to basket", product);
+
 		let findProductByID = basket.find((item) => item.id === product.id);
 
 		if (findProductByID) {
@@ -41,6 +45,8 @@ const Home = ({ searchProduct }) => {
 		} else {
 			setBasket([...basket, product]);
 		}
+
+		// console.log("findProductByID", findProductByID);
 	};
 
 	const deleteProductsBasket = (id, price) => {
@@ -50,6 +56,9 @@ const Home = ({ searchProduct }) => {
 			findProductByID.count--;
 			findProductByID.price -= price;
 		}
+		// else {
+		// 	setBasket([...basket, product]);
+		// }
 	};
 
 	useEffect(() => {
@@ -110,7 +119,6 @@ const Home = ({ searchProduct }) => {
 					{data.length ? productsData : <h4>Loading...</h4>}
 				</div>
 			</div>
-			<Basket basket={basket} />
 		</>
 	);
 };

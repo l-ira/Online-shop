@@ -4,17 +4,15 @@
 	align-items: center;
 	max-width: 100vw;
 	min-height: 90vw;
-	background-color: #fff;
+	background-color: rgb(165, 230, 121);
 }
 
 .Product-container {
 	width: 80%;
 	display: flex;
-	background-color: rgba(236, 238, 120, 0.603);
-	border-radius: 10px;
+	background-color: #e4e27f;
 	flex-wrap: wrap;
 	justify-content: center;
-	padding: 20px 0;
 }
 
 .count-row {

@@ -4,6 +4,7 @@ import "./Card.css";
 
 const Card = () => {
 	const { id } = useParams();
+	console.log(id);
 
 	const [product, setProduct] = useState("");
 
@@ -15,12 +16,10 @@ const Card = () => {
 
 	return (
 		<div className="Card-container">
-			<img className="Product-img" width="200px" src={product.image} />
-			<div className="Product-details">
-				<h3>{product.title}</h3>
-				<div>{product.description}</div>
-				<h5>${product.price}</h5>
-			</div>
+			<h3>{product.title}</h3>
+			<div>{product.description}</div>
+			<h5>${product.price}</h5>
+			<img width="200px" src={product.image} />
 		</div>
 	);
 };
