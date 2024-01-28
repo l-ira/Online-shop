@@ -18,13 +18,13 @@ const Home = ({ searchProduct, getBasket }) => {
 			.then((res) => res.json())
 			.then((json) => {
 				setData(json);
-				setOriginalData(json); // Set the original data when the component mounts
+				setOriginalData(json);
 			});
 	}, []);
 
 	useEffect(() => {
 		if (searchProduct.trim() === "") {
-			setData(originalData); // Reset data to the original list of products
+			setData(originalData);
 		} else {
 			const resultSearchProduct = originalData.filter((item) =>
 				item.title.toLowerCase().includes(searchProduct.toLowerCase())
@@ -32,11 +32,8 @@ const Home = ({ searchProduct, getBasket }) => {
 			setData(resultSearchProduct);
 		}
 	}, [searchProduct, originalData]);
-	// ... (rest of the component remains unchanged)
 
 	const addProductsToBasket = (product) => {
-		// console.log("product added to basket", product);
-
 		let findProductByID = basket.find((item) => item.id === product.id);
 
 		if (findProductByID) {
@@ -58,9 +55,6 @@ const Home = ({ searchProduct, getBasket }) => {
 			findProductByID.count--;
 			findProductByID.price -= price;
 		}
-		// else {
-		// 	setBasket([...basket, product]);
-		// }
 	};
 
 	useEffect(() => {
@@ -69,12 +63,6 @@ const Home = ({ searchProduct, getBasket }) => {
 			.then((json) => setData(json));
 	}, []);
 
-	// Variant 1
-	// const productsData = data.map((product) => (
-	// 	<Product title={product.title} price={product.price} key={product.id} />
-	// ));
-
-	// Variant 2
 	//чтобы не прописывать каждый раз product. можно деструктурировать:
 	const productsData = data.map(({ title, price, id, image }) => (
 		<Product
@@ -88,20 +76,6 @@ const Home = ({ searchProduct, getBasket }) => {
 		/>
 	));
 
-	// Variant 1
-	// const productsCategory = (category) => {
-	// 	if (category === "all") {
-	// 		fetch("https://fakestoreapi.com/products")
-	// 			.then((res) => res.json())
-	// 			.then((json) => setData(json));
-	// 	} else {
-	// 		fetch(`${API_URL_PRODUCTS}/category/${category}`)
-	// 			.then((res) => res.json())
-	// 			.then((json) => setData(json));
-	// 	}
-	// };
-
-	// Variant 2
 	const productsCategory = (category) => {
 		fetch(
 			category !== "all"
@@ -114,7 +88,6 @@ const Home = ({ searchProduct, getBasket }) => {
 
 	return (
 		<>
-			{console.log("basket", basket)}
 			<Categories productsCategory={productsCategory} />
 			<div className="Product-container">
 				{data.length ? productsData : <h4>Loading...</h4>}

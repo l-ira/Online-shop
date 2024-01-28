@@ -2,16 +2,32 @@ import React from "react";
 import "./Basket.css";
 import { Link } from "react-router-dom";
 
-const Basket = ({ basketFromApp }) => {
+const Basket = ({ basketFromApp, updateBasket }) => {
+	const handleRemove = (id) => {
+		// Удаление товара из корзины
+		const updatedBasket = basketFromApp.filter((item) => item.id !== id);
+		updateBasket(updatedBasket); // Обновляем корзину в App.js
+	};
 	const basketUI = basketFromApp.map((item) => (
-		<div className="Product-item" key={item.id}>
+		<div className="Basket-container" key={item.id}>
+			<div
+				className="Product-img-basket"
+				style={{ backgroundImage: `url(${item.image})` }}
+				alt={item.title}
+			/>
 			<Link to={`/card/${item.id}`} className="Product-title">
 				{item.title}
 			</Link>
-			<h3>{item.title}</h3>
-			<img width="150px" src={item.image} alt={item.title} />
 			<h4>${item.price}</h4>
-			<div>Quantity: {item.count}</div>
+			<div>
+				<h4>Q-ty: {item.count}</h4>
+			</div>
+			<button
+				onClick={() => handleRemove(item.id)}
+				className="Btn-remove"
+			>
+				Remove
+			</button>
 		</div>
 	));
 

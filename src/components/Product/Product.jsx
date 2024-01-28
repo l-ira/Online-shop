@@ -42,6 +42,7 @@ const Product = (props) => {
 				<button className="Btn-add Btn-basket" onClick={addBasket}>
 					+
 				</button>
+				<h4 className="Count">{productCount}</h4>
 				<button
 					className="Btn-delete Btn-basket"
 					onClick={deleteBasket}
@@ -49,7 +50,6 @@ const Product = (props) => {
 					-
 				</button>
 			</div>
-			<div className="Count">Количество: {productCount}</div>
 		</div>
 	);
 };

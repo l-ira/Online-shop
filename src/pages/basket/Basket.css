@@ -1,4 +1,49 @@
 .Basket-container {
-	height: 50vh;
-	background-color: rgb(164, 93, 231);
+	display: grid;
+	width: 80vw;
+	height: 120px;
+	grid-template-columns: 100px 1fr repeat(3, 80px);
+	grid-template-areas: "image title price quantity button";
+	justify-content: center;
+	gap: 10px;
+	align-items: center;
+	margin: 0 auto;
+	background-color: #fff;
+	border-bottom: rgb(46, 0, 105) 0.5px solid;
+	padding: 20px 5px 0 5px;
+}
+
+.Product-img-basket {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	grid-area: image;
+	height: 60px;
+	padding: 10px;
+	transition: transform 0.2s ease-in-out;
+}
+
+.Product-img-basket:hover {
+	transform: scale(1.5);
+}
+
+.Product-title:hover {
+	color: #000;
+}
+
+.Btn-remove {
+	width: 80px;
+	height: 30px;
+	background-color: rgb(46, 0, 105);
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 5px;
+}
+
+.Btn-remove:hover {
+	background-color: rgba(46, 0, 105, 0.295);
+	color: #000;
+	cursor: pointer;
 }
