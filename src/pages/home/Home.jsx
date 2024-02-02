@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Product from "../../components/Product/Product";
 import { Categories } from "../../components/Categories/Categories";
+import { useSelector } from "react-redux";
 
 const API_URL_PRODUCTS = "https://fakestoreapi.com/products";
 
 const Home = ({ searchProduct, getBasket }) => {
-	console.log("search products in Home", searchProduct);
 	const [data, setData] = useState([]);
 	const [originalData, setOriginalData] = useState([]);
-
 	const [basket, setBasket] = useState([]);
-	console.log("search product", searchProduct, data);
+	const messageHome = useSelector((state) => state.counter.messageSlice);
 
 	useEffect(() => {
 		fetch(API_URL_PRODUCTS)
@@ -88,6 +87,7 @@ const Home = ({ searchProduct, getBasket }) => {
 
 	return (
 		<>
+			<h1>{messageHome}</h1>
 			<Categories productsCategory={productsCategory} />
 			<div className="Product-container">
 				{data.length ? productsData : <h4>Loading...</h4>}

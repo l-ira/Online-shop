@@ -15,27 +15,27 @@ const Header = ({ searchData, getBasketTotal }) => {
 	const navigate = useNavigate();
 	return (
 		<div className="Header-container">
-			<button
+			{/* <button
 				className="Main-btn"
 				onClick={() => {
 					navigate("/");
 				}}
 			>
 				Main page
-			</button>
-			<div className="Header-page-center">
-				<Link to="/" className="Title-shop">
-					<h1>Online Shop</h1>
-				</Link>
-				<div>
-					<input
-						placeholder="Search"
-						// value={searchProduct}
-						className="Input-search"
-						onChange={handleChange}
-					/>
-				</div>
+			</button> */}
+			{/* <div className="Header-page-center"> */}
+			<Link to="/" className="Title-shop">
+				<h1>Online Shop</h1>
+			</Link>
+			<div>
+				<input
+					placeholder="Search"
+					// value={searchProduct}
+					className="Input-search"
+					onChange={handleChange}
+				/>
 			</div>
+			{/* </div> */}
 			<Link to="/basket" className="Basket">
 				<h4>Basket: {getBasketTotal()}</h4>
 			</Link>

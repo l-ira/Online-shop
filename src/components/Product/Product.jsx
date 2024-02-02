@@ -1,6 +1,8 @@
 import { Link, useSearchParams } from "react-router-dom";
 import "./Product.css";
 import { useState } from "react";
+import { addProductBasketSlice } from "../../redux/slices/basketSlice";
+import { useDispatch } from "react-redux";
 
 const Product = (props) => {
 	const {
@@ -11,6 +13,8 @@ const Product = (props) => {
 		addProductsToBasket,
 		deleteProductsBasket,
 	} = props;
+
+	const dispatch = useDispatch();
 
 	const [productCount, setProductCount] = useState(0);
 
@@ -23,6 +27,8 @@ const Product = (props) => {
 			count: 1,
 			image: image,
 		};
+
+		dispatch(addProductBasketSlice(data));
 		addProductsToBasket(data);
 	};
 

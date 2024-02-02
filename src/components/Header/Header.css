@@ -5,7 +5,7 @@
 	max-width: 100vw;
 	min-height: 10vh;
 	background-color: #8aa9cf;
-	padding-right: 15px;
+	padding: 0 50px;
 	margin: 0 auto 20px 0;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .Basket {
-	margin: 0 20px;
+	/* margin: 0 20px; */
 	text-decoration: none;
 	color: #222;
 }
@@ -46,12 +46,13 @@
 }
 
 .Input-search {
-	width: 500px;
+	width: 40vw;
 	height: 20px;
 	padding: 5px;
 	border-radius: 5px;
 	border: none;
-	margin: 0 0 20px 0;
+	margin: 0 10px;
+	/* margin: 0 0 20px 0; */
 }
 
 .Header-page-center {
@@ -63,4 +64,24 @@
 
 h1 {
 	margin: 20px 0;
+}
+
+@media screen and (max-width: 780px) {
+	.Header-container {
+		display: flex;
+		height: 150px;
+		flex-direction: column;
+	}
+
+	.Input-search {
+		width: 70vw;
+		height: 20px;
+		padding: 5px;
+		border-radius: 5px;
+		border: none;
+	}
+
+	h1 {
+		margin: 10px 0;
+	}
 }
