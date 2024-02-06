@@ -6,10 +6,8 @@ import { useSelector } from "react-redux";
 
 const API_URL_PRODUCTS = "https://fakestoreapi.com/products";
 
-const Home = ({ searchProduct, getBasket }) => {
+const Home = ({ searchProduct }) => {
 	const [data, setData] = useState([]);
-	const [originalData, setOriginalData] = useState([]);
-	const [basket, setBasket] = useState([]);
 	const messageHome = useSelector((state) => state.counter.messageSlice);
 
 	useEffect(() => {
@@ -17,44 +15,8 @@ const Home = ({ searchProduct, getBasket }) => {
 			.then((res) => res.json())
 			.then((json) => {
 				setData(json);
-				setOriginalData(json);
 			});
 	}, []);
-
-	useEffect(() => {
-		if (searchProduct.trim() === "") {
-			setData(originalData);
-		} else {
-			const resultSearchProduct = originalData.filter((item) =>
-				item.title.toLowerCase().includes(searchProduct.toLowerCase())
-			);
-			setData(resultSearchProduct);
-		}
-	}, [searchProduct, originalData]);
-
-	const addProductsToBasket = (product) => {
-		let findProductByID = basket.find((item) => item.id === product.id);
-
-		if (findProductByID) {
-			findProductByID.count++;
-			findProductByID.price += product.price;
-		} else {
-			setBasket([...basket, product]);
-		}
-	};
-
-	useEffect(() => {
-		getBasket(basket);
-	}, [basket]);
-
-	const deleteProductsBasket = (id, price) => {
-		let findProductByID = basket.find((item) => item.id === id);
-
-		if (findProductByID) {
-			findProductByID.count--;
-			findProductByID.price -= price;
-		}
-	};
 
 	useEffect(() => {
 		fetch(API_URL_PRODUCTS)
@@ -64,15 +26,7 @@ const Home = ({ searchProduct, getBasket }) => {
 
 	//чтобы не прописывать каждый раз product. можно деструктурировать:
 	const productsData = data.map(({ title, price, id, image }) => (
-		<Product
-			title={title}
-			price={price}
-			key={id}
-			image={image}
-			id={id}
-			addProductsToBasket={addProductsToBasket}
-			deleteProductsBasket={deleteProductsBasket}
-		/>
+		<Product title={title} price={price} key={id} image={image} id={id} />
 	));
 
 	const productsCategory = (category) => {

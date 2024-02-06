@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import "./Card.css";
 
-const Card = ({ basket }) => {
+const Card = () => {
 	const { id } = useParams();
 
 	const [product, setProduct] = useState("");
@@ -12,13 +12,7 @@ const Card = ({ basket }) => {
 		fetch("https://fakestoreapi.com/products/" + id)
 			.then((res) => res.json())
 			.then((json) => setProduct(json));
-		const basketItem = basket.find((item) => item.id === Number(id));
-		if (basketItem) {
-			setProductCount(basketItem.count);
-		} else {
-			setProductCount(0);
-		}
-	}, [id, basket]);
+	}, [id]);
 
 	const handleIncrement = () => {
 		setProductCount(productCount + 1);

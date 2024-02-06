@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = ({ searchData, getBasketTotal }) => {
+const Header = ({ searchData }) => {
 	const [searchProduct, setSearchProduct] = useState("");
 
 	const handleChange = (event) => {
@@ -37,7 +37,7 @@ const Header = ({ searchData, getBasketTotal }) => {
 			</div>
 			{/* </div> */}
 			<Link to="/basket" className="Basket">
-				<h4>Basket: {getBasketTotal()}</h4>
+				Basket: 0
 			</Link>
 		</div>
 	);

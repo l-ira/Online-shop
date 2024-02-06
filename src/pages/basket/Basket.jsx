@@ -1,33 +1,26 @@
 import React from "react";
 import "./Basket.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Basket = ({ basketFromApp, updateBasket }) => {
-	const handleRemove = (id) => {
-		// Удаление товара из корзины
-		const updatedBasket = basketFromApp.filter((item) => item.id !== id);
-		updateBasket(updatedBasket); // Обновляем корзину в App.js
-	};
-	const basketUI = basketFromApp.map((item) => (
-		<div className="Basket-container" key={item.id}>
+const Basket = () => {
+	const basket = useSelector((state) => state.basketStore.basket);
+
+	const basketUI = basket?.map(({ id, title, price, image, count }) => (
+		<div className="Basket-container" key={id}>
 			<div
 				className="Product-img-basket"
-				style={{ backgroundImage: `url(${item.image})` }}
-				alt={item.title}
+				style={{ backgroundImage: `url(${image})` }}
+				alt={title}
 			/>
-			<Link to={`/card/${item.id}`} className="Product-title">
-				{item.title}
+			<Link to={`/card/${id}`} className="Product-title">
+				{title}
 			</Link>
-			<h4>${item.price}</h4>
+			<h4>${price}</h4>
 			<div>
-				<h4>Q-ty: {item.count}</h4>
+				<h4>Q-ty: {count}</h4>
 			</div>
-			<button
-				onClick={() => handleRemove(item.id)}
-				className="Btn-remove"
-			>
-				Remove
-			</button>
+			<button className="Btn-remove">Remove</button>
 		</div>
 	));
 

@@ -10,8 +10,9 @@ const Product = (props) => {
 		price,
 		image,
 		id,
-		addProductsToBasket,
-		deleteProductsBasket,
+		////-------------------Old version w/o Redux toolkit------------------------------
+		// addProductsToBasket,
+		// deleteProductsBasket,
 	} = props;
 
 	const dispatch = useDispatch();
@@ -29,13 +30,15 @@ const Product = (props) => {
 		};
 
 		dispatch(addProductBasketSlice(data));
-		addProductsToBasket(data);
+		////-------------------Old version w/o Redux toolkit------------------------------
+		// addProductsToBasket(data);
 	};
 
-	const deleteBasket = () => {
-		productCount > 0 && setProductCount(productCount - 1);
-		deleteProductsBasket(id, price);
-	};
+	////-------------------Old version w/o Redux toolkit------------------------------
+	// const deleteBasket = () => {
+	// 	productCount > 0 && setProductCount(productCount - 1);
+	// 	deleteProductsBasket(id, price);
+	// };
 
 	return (
 		<div className="Product-item">
@@ -51,7 +54,9 @@ const Product = (props) => {
 				<h4 className="Count">{productCount}</h4>
 				<button
 					className="Btn-delete Btn-basket"
-					onClick={deleteBasket}
+					onClick={() => {
+						productCount > 0 && setProductCount(productCount - 1); //deleted {deleteBasket}
+					}}
 				>
 					-
 				</button>

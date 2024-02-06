@@ -13,55 +13,25 @@ import Counter from './components/Counter';
 function App() {
   const [searchProduct, setSearchProduct] = useState('')
 
-  const [basket, setBasket] = useState([])
-
   const searchData = (searchWord) => {
     setSearchProduct(searchWord)
   }
 
-  const getBasket = (basketGetBasket) => {
-    setBasket(basketGetBasket)
-  }
-
-  const getBasketTotal = () => {
-    return basket.reduce((total, item) => total + item.count, 0)
-  }
-
-  const addToBasket = (product) => {
-    // Проверяем, есть ли уже такой товар в корзине
-    const existingProductIndex = basket.findIndex(item => item.id === product.id);
-
-    if (existingProductIndex !== -1) {
-      // Если товар уже есть в корзине, увеличиваем его количество
-      const updatedBasket = [...basket];
-      updatedBasket[existingProductIndex].count++;
-      setBasket(updatedBasket);
-    } else {
-      // Если товара еще нет в корзине, добавляем его
-      setBasket(prevBasket => [...prevBasket, { ...product, count: 1 }]);
-    }
-  };
-
-  const updateBasket = (updatedBasket) => {
-    // Функция для обновления корзины в App.js
-    setBasket(updatedBasket);
-  };
 
   return (
     <>
       <Counter />
-      <Header searchData={searchData} getBasketTotal={getBasketTotal} />
+      <Header searchData={searchData} />
       <div className="Home-container">
         <Routes>
           <Route path="/" element={<Home
-            getBasket={getBasket}
             searchProduct={searchProduct} />} />
-          <Route path="/basket" element={<Basket basketFromApp={basket} updateBasket={updateBasket} />} />
-          <Route path="/card/:id" element={<Card basket={basket} updateBasket={updateBasket} />} />
+          <Route path="/basket" element={<Basket />} />
+          <Route path="/card/:id" element={<Card />} />
         </Routes>
       </div>
     </>
   )
-}
+};
 
 export default App;

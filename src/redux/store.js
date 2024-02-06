@@ -5,6 +5,6 @@ import basketReducer from './slices/basketSlice'
 export const store = configureStore({
     reducer: {
         counter: counterReducer,
-        basket: basketReducer,
+        basketStore: basketReducer,
     },
 })
