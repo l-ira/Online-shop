@@ -5,15 +5,7 @@ import { addProductBasketSlice } from "../../redux/slices/basketSlice";
 import { useDispatch } from "react-redux";
 
 const Product = (props) => {
-	const {
-		title,
-		price,
-		image,
-		id,
-		////-------------------Old version w/o Redux toolkit------------------------------
-		// addProductsToBasket,
-		// deleteProductsBasket,
-	} = props;
+	const { title, price, image, id } = props;
 
 	const dispatch = useDispatch();
 
@@ -30,15 +22,7 @@ const Product = (props) => {
 		};
 
 		dispatch(addProductBasketSlice(data));
-		////-------------------Old version w/o Redux toolkit------------------------------
-		// addProductsToBasket(data);
 	};
-
-	////-------------------Old version w/o Redux toolkit------------------------------
-	// const deleteBasket = () => {
-	// 	productCount > 0 && setProductCount(productCount - 1);
-	// 	deleteProductsBasket(id, price);
-	// };
 
 	return (
 		<div className="Product-item">

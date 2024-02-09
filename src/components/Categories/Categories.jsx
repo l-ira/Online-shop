@@ -1,20 +1,33 @@
 import { useEffect, useState } from "react";
 import "./Categories.css";
+import {
+	getCategories,
+	setSelectedCategory,
+} from "../../redux/slices/categoriesSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-export const Categories = ({ productsCategory }) => {
-	const [categories, setCategories] = useState();
+export const Categories = () => {
+	// const [categories, setCategories] = useState(); //old verion w/o redux toolkit
 
-	const [selectedCategory, setSelectedCategory] = useState("");
+	const [selectCategory, setSelectCategory] = useState(""); //old verion w/o redux toolkit
+
+	const categories = useSelector((state) => state.categories.items); //from slice
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		fetch("https://fakestoreapi.com/products/categories")
-			.then((res) => res.json())
-			.then((json) => setCategories(json));
+		//Old version w/o redux toolkit
+		// fetch("https://fakestoreapi.com/products/categories")
+		// 	.then((res) => res.json())
+		// 	.then((json) => setCategories(json));
+
+		dispatch(getCategories());
 	}, []);
 
 	const handleCategory = (category) => {
-		setSelectedCategory(category);
-		productsCategory(category);
+		setSelectCategory(category);
+		dispatch(setSelectedCategory(category));
+		// productsCategory(category); //old verssion w/o redux toolkit
 	};
 
 	const categoriesList = categories?.map((category, idx) => (
@@ -37,7 +50,7 @@ export const Categories = ({ productsCategory }) => {
 
 			<select
 				className="Category"
-				value={selectedCategory}
+				value={selectCategory}
 				onChange={(event) => handleCategory(event.target.value)}
 			>
 				<option>all</option>
