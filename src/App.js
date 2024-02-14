@@ -8,7 +8,6 @@ import {
   Routes,
 } from "react-router-dom";
 import { useState } from 'react';
-import Counter from './components/Counter';
 
 function App() {
   const [searchProduct, setSearchProduct] = useState('')
@@ -21,7 +20,6 @@ function App() {
 
   return (
     <>
-      <Counter />
       <Header
       //----------------Old version with redux toolkit----------------
       // searchData={searchData}   

@@ -6,7 +6,6 @@ export const getProducts = createAsyncThunk(
     async () => {
         try {
             const { data } = await axios.get('https://fakestoreapi.com/products')
-            console.log(data)
             return data
         }
         catch (error) {
@@ -17,7 +16,6 @@ export const getProducts = createAsyncThunk(
 export const getProductFromCategories = createAsyncThunk('category/fetchProductFromCategories', async (category) => {
     try {
         const { data } = await axios.get(`https://fakestoreapi.com/products/category/${category}`)
-        console.log('response categories', data)
         return data
     } catch (error) {
         console.log(error)

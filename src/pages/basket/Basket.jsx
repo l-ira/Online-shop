@@ -17,7 +17,7 @@ const Basket = () => {
 			<Link to={`/card/${id}`} className="Product-title">
 				{title}
 			</Link>
-			<h4>${price}</h4>
+			<h4>${price.toFixed(2)}</h4>
 			<div>
 				<h4>Q-ty: {count}</h4>
 			</div>
@@ -30,10 +30,10 @@ const Basket = () => {
 			<div className="Product-container">
 				{basket.length ? (
 					<div>
-						{basketUI} <h2>Итоговая сумма: {totalSum} $</h2>
+						{basketUI} <h2>Итоговая сумма: ${totalSum}</h2>
 					</div>
 				) : (
-					<h2>Корзина пуста</h2>
+					<h2>The cart is empty</h2>
 				)}
 			</div>
 		</>

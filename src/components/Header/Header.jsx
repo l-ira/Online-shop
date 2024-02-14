@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "./Header.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts, setSearchWord } from "../../redux/slices/productsSlice";
+import { IoCartOutline } from "react-icons/io5";
 
 const Header = () => {
+	const basketCount = useSelector(
+		(state) => state.basketStore.totalBasketCount
+	);
 	const dispatch = useDispatch();
 
 	const handleChange = (event) => {
@@ -15,7 +19,8 @@ const Header = () => {
 		}
 	};
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate(); //for Main-btn
+
 	return (
 		<div className="Header-container">
 			{/* <button
@@ -40,7 +45,7 @@ const Header = () => {
 			</div>
 			{/* </div> */}
 			<Link to="/basket" className="Basket">
-				Basket: 0
+				<IoCartOutline size={40} /> <h3>{basketCount}</h3>
 			</Link>
 		</div>
 	);

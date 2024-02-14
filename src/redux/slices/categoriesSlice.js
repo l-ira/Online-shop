@@ -4,7 +4,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const getCategories = createAsyncThunk('category/fetchCategories', async () => {
     try {
         const { data } = await axios.get("https://fakestoreapi.com/products/categories")
-        console.log('response categories', data)
         return data
     } catch (error) {
         console.log(error)

@@ -15,7 +15,6 @@ const Home = () => {
 
 	const [data, setData] = useState([]);
 
-	const messageHome = useSelector((state) => state.counter.messageSlice);
 	const category = useSelector((state) => state.categories.selectedCategory);
 	const products = useSelector((state) => state.items.items);
 
@@ -66,7 +65,6 @@ const Home = () => {
 
 	return (
 		<>
-			<h1>{messageHome}</h1>
 			<Categories
 			// productsCategory={productsCategory} //old verion w/o redux toolkit
 			/>

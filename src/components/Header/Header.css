@@ -1,15 +1,19 @@
 .Header-container {
 	display: flex;
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	width: 95%;
 	justify-content: space-between;
 	align-items: center;
-	max-width: 100vw;
 	min-height: 10vh;
 	background-color: #8aa9cf;
-	padding: 0 50px;
+	padding: 0 40px;
 	margin: 0 auto 20px 0;
 }
 
-.Main-btn {
+/* .Main-btn {
 	padding: 10px 20px;
 	min-width: 30px;
 	min-height: 25px;
@@ -24,7 +28,7 @@
 	cursor: pointer;
 	background-color: rgba(46, 0, 105, 0.555);
 	color: #fff;
-}
+} */
 
 .Title-shop {
 	text-decoration: none;
@@ -36,9 +40,11 @@
 }
 
 .Basket {
+	display: flex;
 	/* margin: 0 20px; */
 	text-decoration: none;
 	color: #222;
+	align-items: center;
 }
 
 .Basket:hover {
