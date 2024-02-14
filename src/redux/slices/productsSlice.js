@@ -26,13 +26,21 @@ export const getProductFromCategories = createAsyncThunk('category/fetchProductF
 
 const initialState = {
     items: [],
+    // searchItems: '',
 }
 
 const productSlice = createSlice({
     name: 'items',
     initialState,
     reducers: {
+        setSearchWord: (state, action) => {
+            // state.searchItems = action.payload
 
+            state.items = state.items.filter((item) =>
+                item.title.toLowerCase().includes(action.payload.toLowerCase())
+            )
+
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getProducts.fulfilled, (state, action) => {
@@ -44,5 +52,5 @@ const productSlice = createSlice({
     },
 })
 
-
+export const { setSearchWord } = productSlice.actions
 export default productSlice.reducer

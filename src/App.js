@@ -13,15 +13,19 @@ import Counter from './components/Counter';
 function App() {
   const [searchProduct, setSearchProduct] = useState('')
 
-  const searchData = (searchWord) => {
-    setSearchProduct(searchWord)
-  }
+  //----------------Old version with redux toolkit----------------
+  // const searchData = (searchWord) => {
+  //   setSearchProduct(searchWord)
+  // }
 
 
   return (
     <>
       <Counter />
-      <Header searchData={searchData} />
+      <Header
+      //----------------Old version with redux toolkit----------------
+      // searchData={searchData}   
+      />
       <div className="Home-container">
         <Routes>
           <Route path="/" element={<Home

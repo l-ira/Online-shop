@@ -19,8 +19,6 @@ const Home = () => {
 	const category = useSelector((state) => state.categories.selectedCategory);
 	const products = useSelector((state) => state.items.items);
 
-	console.log(products);
-
 	// useEffect(() => {
 	// 	fetch(API_URL_PRODUCTS)
 	// 		.then((res) => res.json())

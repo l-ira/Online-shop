@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     basket: [],
+    totalSum: 0,
 }
 
 export const basketSlice = createSlice({
@@ -17,7 +18,7 @@ export const basketSlice = createSlice({
             } else {
                 state.basket.push({ ...action.payload })
             }
-
+            state.totalSum = state.basket.reduce((acc, item) => { return acc + item.price }, 0)
         },
 
     }

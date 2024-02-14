@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProducts, setSearchWord } from "../../redux/slices/productsSlice";
 
-const Header = ({ searchData }) => {
-	const [searchProduct, setSearchProduct] = useState("");
+const Header = () => {
+	const dispatch = useDispatch();
 
 	const handleChange = (event) => {
-		console.log("handleChange", event.target.value);
-		setSearchProduct(event.target.value);
-
-		searchData(event.target.value);
+		if (event.target.value === "") {
+			dispatch(getProducts());
+		} else {
+			dispatch(setSearchWord(event.target.value));
+		}
 	};
 
 	const navigate = useNavigate();
