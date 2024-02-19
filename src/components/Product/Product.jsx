@@ -33,7 +33,7 @@ const Product = (props) => {
 			id: id,
 			title: title,
 			price: price,
-			count: 1,
+			count: 0,
 			image: image,
 		};
 

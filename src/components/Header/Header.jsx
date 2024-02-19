@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setSearchWord } from "../../redux/slices/productsSlice";
+import {
+	getProductsFromCategories,
+	setSearchWord,
+} from "../../redux/slices/productsSlice";
 import { IoCartOutline } from "react-icons/io5";
 
 const Header = () => {
@@ -13,7 +16,7 @@ const Header = () => {
 
 	const handleChange = (event) => {
 		if (event.target.value === "") {
-			dispatch(getProducts());
+			dispatch(getProductsFromCategories("all"));
 		} else {
 			dispatch(setSearchWord(event.target.value));
 		}

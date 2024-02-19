@@ -28,14 +28,14 @@ export const basketSlice = createSlice({
         deleteProductBasketSlice: (state, action) => {
             let findProductByID = state.basket.find((item) => item.id === action.payload.id);
 
-            if (findProductByID) {
+            if (findProductByID && findProductByID.count > 0) {
                 findProductByID.count--;
                 findProductByID.price -= action.payload.price;
+
+                state.totalBasketCount--
+
+                state.totalSum = (state.totalSum - action.payload.price).toFixed(2)
             }
-
-            state.totalBasketCount > 0 && state.totalBasketCount--
-
-            state.totalSum = (state.totalSum - action.payload.price).toFixed(2)
         },
     }
 }
