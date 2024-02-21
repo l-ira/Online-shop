@@ -11,6 +11,7 @@ export const basketSlice = createSlice({
     initialState: initialState,
     reducers: {
         addProductBasketSlice: (state, action) => {
+            const { id, title, price, count, image } = action.payload
             let findProductByID = state.basket.find((item) => item.id === action.payload.id);
 
             if (findProductByID) {
@@ -23,6 +24,13 @@ export const basketSlice = createSlice({
             state.totalSum = state.basket.reduce((acc, item) => { return acc + item.price }, 0)
 
             state.totalBasketCount = state.basket.reduce((acc, item) => { return acc + item.count }, 0)
+            console.log({ title: action.payload.title })
+            localStorage.setItem(id, JSON.stringify({
+                title,
+                price,
+                count,
+                image
+            }))
         },
 
         deleteProductBasketSlice: (state, action) => {

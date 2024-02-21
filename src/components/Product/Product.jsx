@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from "react-router-dom";
 import "./Product.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	addProductBasketSlice,
 	deleteProductBasketSlice,
@@ -16,16 +16,21 @@ const Product = (props) => {
 
 	const addBasket = () => {
 		setProductCount(productCount + 1);
+	};
+
+	useEffect(() => {
 		const data = {
 			id: id,
 			title: title,
 			price: price,
-			count: 1,
+			count: productCount,
 			image: image,
 		};
 
-		dispatch(addProductBasketSlice(data));
-	};
+		if (productCount > 0) {
+			dispatch(addProductBasketSlice(data));
+		}
+	}, [productCount]);
 
 	const deleteBasket = () => {
 		productCount > 0 && setProductCount(productCount - 1);
