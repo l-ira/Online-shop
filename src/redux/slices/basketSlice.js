@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    basket: [],
-    totalSum: 0,
     totalBasketCount: 0,
+    basketLS: [],
 }
 
 export const basketSlice = createSlice({
@@ -12,42 +11,38 @@ export const basketSlice = createSlice({
     reducers: {
         addProductBasketSlice: (state, action) => {
             const { id, title, price, count, image } = action.payload
-            let findProductByID = state.basket.find((item) => item.id === action.payload.id);
 
-            if (findProductByID) {
-                findProductByID.count++;
-                findProductByID.price += action.payload.price;
-            } else {
-                state.basket.push({ ...action.payload })
-            }
-
-            state.totalSum = state.basket.reduce((acc, item) => { return acc + item.price }, 0)
-
-            state.totalBasketCount = state.basket.reduce((acc, item) => { return acc + item.count }, 0)
-            console.log({ title: action.payload.title })
             localStorage.setItem(id, JSON.stringify({
                 title,
                 price,
                 count,
                 image
             }))
+
+            const keyIdLS = Object.keys(localStorage)
+
+            state.basketLS = keyIdLS.map((id) => {
+                const product = JSON.parse(localStorage.getItem(id))
+                return { id, ...product }
+            })
+
+            state.totalBasketCount = state.basketLS?.reduce((acc, item) => {
+                return acc + item.count
+            }, 0)
         },
 
-        deleteProductBasketSlice: (state, action) => {
-            let findProductByID = state.basket.find((item) => item.id === action.payload.id);
+        loadBasketFromLS: (state, action) => {
+            const keyIdLS = Object.keys(localStorage)
 
-            if (findProductByID && findProductByID.count > 0) {
-                findProductByID.count--;
-                findProductByID.price -= action.payload.price;
+            state.basketLS = keyIdLS.map((id) => {
+                const product = JSON.parse(localStorage.getItem(id))
+                return { id, ...product }
+            })
+        }
 
-                state.totalBasketCount--
-
-                state.totalSum = (state.totalSum - action.payload.price).toFixed(2)
-            }
-        },
     }
 }
 )
 
-export const { addProductBasketSlice, deleteProductBasketSlice } = basketSlice.actions
+export const { addProductBasketSlice, deleteProductBasketSlice, loadBasketFromLS } = basketSlice.actions
 export default basketSlice.reducer

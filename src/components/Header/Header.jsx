@@ -9,10 +9,11 @@ import {
 import { IoCartOutline } from "react-icons/io5";
 
 const Header = () => {
+	const dispatch = useDispatch();
+
 	const basketCount = useSelector(
 		(state) => state.basketStore.totalBasketCount
 	);
-	const dispatch = useDispatch();
 
 	const handleChange = (event) => {
 		if (event.target.value === "") {
