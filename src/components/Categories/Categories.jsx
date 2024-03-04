@@ -3,7 +3,7 @@ import "./Categories.css";
 import {
 	getCategories,
 	setSelectedCategory,
-} from "../../redux/slices/categoriesSlice";
+} from "../../redux/slices/categoriesSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Categories = () => {

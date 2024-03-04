@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	getProductsFromCategories,
 	setSearchWord,
-} from "../../redux/slices/productsSlice";
+} from "../../redux/slices/productsSlice.ts";
 import { IoCartOutline } from "react-icons/io5";
 
 const Header = () => {
