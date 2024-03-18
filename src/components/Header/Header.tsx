@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,14 +8,14 @@ import {
 } from "../../redux/slices/productsSlice.ts";
 import { IoCartOutline } from "react-icons/io5";
 
-const Header = () => {
+const Header = (): React.FC => {
 	const dispatch = useDispatch();
 
 	const basketCount = useSelector(
 		(state) => state.basketStore.totalBasketCount
 	);
 
-	const handleChange = (event) => {
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.value === "") {
 			dispatch(getProductsFromCategories("all"));
 		} else {
@@ -23,19 +23,8 @@ const Header = () => {
 		}
 	};
 
-	// const navigate = useNavigate(); //for Main-btn
-
 	return (
 		<div className="Header-container">
-			{/* <button
-				className="Main-btn"
-				onClick={() => {
-					navigate("/");
-				}}
-			>
-				Main page
-			</button> */}
-			{/* <div className="Header-page-center"> */}
 			<Link to="/" className="Title-shop">
 				<h1>Online Shop</h1>
 			</Link>

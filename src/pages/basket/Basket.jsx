@@ -3,7 +3,7 @@ import "./Basket.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { loadBasketFromLS } from "../../redux/slices/basketSlice";
+import { loadBasketFromLS } from "../../redux/slices/basketSlice.ts";
 
 const Basket = () => {
 	const keyIdLS = Object.keys(localStorage);
@@ -52,17 +52,6 @@ const Basket = () => {
 				<div>{productBasketUI}</div>
 				<h2>Итоговая сумма: ${totalSum}</h2>
 			</div>
-
-			{/* Original version */}
-			{/* <div className="Product-container">
-				{basket.length ? (
-					<div>
-						{basketUI} <h2>Итоговая сумма: ${totalSum}</h2>
-					</div>
-				) : (
-					<h2>The cart is empty</h2>
-				)}
-			</div> */}
 		</>
 	);
 };

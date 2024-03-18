@@ -4,7 +4,7 @@ const BASE_API = "https://fakestoreapi.com/products";
 
 export const getProductsFromCategories = createAsyncThunk(
 	"category/fetchProductFromCategories",
-	async (category) => {
+	async (category: string) => {
 		try {
 			const { data } = await axios.get(
 				category === "all"
@@ -18,6 +18,12 @@ export const getProductsFromCategories = createAsyncThunk(
 	}
 );
 
+enum Status {
+	LOADING = "loading",
+	SUCCESS = "success",
+	ERROR = "error",
+}
+
 type TItems = {
 	id: number;
 	title: string;
@@ -29,10 +35,12 @@ type TItems = {
 
 type TInitialState = {
 	items: Array<TItems>;
+	status: Status;
 };
 
 const initialState: TInitialState = {
 	items: [],
+	status: Status.LOADING,
 };
 
 const productSlice = createSlice({
@@ -46,12 +54,19 @@ const productSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
+		builder.addCase(getProductsFromCategories.pending, (state, action) => {
+			state.status = Status.LOADING;
+		});
 		builder.addCase(
 			getProductsFromCategories.fulfilled,
 			(state, action) => {
 				state.items = action.payload;
+				state.status = Status.SUCCESS;
 			}
 		);
+		builder.addCase(getProductsFromCategories.rejected, (state, action) => {
+			state.status = Status.ERROR;
+		});
 	},
 });
 
