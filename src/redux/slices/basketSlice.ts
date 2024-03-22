@@ -3,8 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 type TItems = {
 	id: number;
 	title: string;
-	price: string;
 	image: string;
+	price: number;
+	count: number;
 };
 
 type TInitialState = {

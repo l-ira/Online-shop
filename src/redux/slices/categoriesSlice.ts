@@ -1,22 +1,25 @@
-import axios from "axios";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios, { AxiosResponse } from "axios";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const getCategories = createAsyncThunk(
+export const getCategories = createAsyncThunk<CategoryData>(
 	"category/fetchCategories",
 	async () => {
 		try {
-			const { data } = await axios.get(
+			const { data } = await axios.get<AxiosResponse<CategoryData>>(
 				"https://fakestoreapi.com/products/categories"
 			);
 			return data;
 		} catch (error) {
-			console.log(error);
+			console.log("error:", error);
+			throw error; //exception
 		}
 	}
 );
 
+type CategoryData = string[];
+
 type TInitialState = {
-	items?: Array<string>;
+	items: CategoryData;
 	selectedCategory: string;
 };
 
@@ -29,7 +32,7 @@ const categoriesSlice = createSlice({
 	name: "categories",
 	initialState,
 	reducers: {
-		setSelectedCategory: (state, action) => {
+		setSelectedCategory: (state, action: PayloadAction<string>) => {
 			state.selectedCategory = action.payload;
 		},
 	},

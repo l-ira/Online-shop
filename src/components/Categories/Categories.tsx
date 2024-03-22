@@ -5,11 +5,14 @@ import {
 	setSelectedCategory,
 } from "../../redux/slices/categoriesSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store.ts";
 
-export const Categories = () => {
-	const [selectCategory, setSelectCategory] = useState(""); //old verion w/o redux toolkit
+export const Categories: React.FC = () => {
+	const [selectCategory, setSelectCategory] = useState<string>(""); //old verion w/o redux toolkit
 
-	const categories = useSelector((state) => state.categories.items); //from slice
+	const categories = useSelector(
+		(state): RootState => state.categories.items
+	); //from slice
 
 	const dispatch = useDispatch();
 
@@ -17,12 +20,12 @@ export const Categories = () => {
 		dispatch(getCategories());
 	}, []);
 
-	const handleCategory = (category) => {
+	const handleCategory = (category: string) => {
 		setSelectCategory(category);
 		dispatch(setSelectedCategory(category));
 	};
 
-	const categoriesList = categories?.map((category, idx) => (
+	const categoriesList = categories?.map((category: string, idx: number) => (
 		<option key={idx} value={category}>
 			{category}
 		</option>

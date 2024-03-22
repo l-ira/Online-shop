@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./Basket.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loadBasketFromLS } from "../../redux/slices/basketSlice.ts";
 

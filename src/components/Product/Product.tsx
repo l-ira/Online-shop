@@ -6,9 +6,19 @@ import {
 	deleteProductBasketSlice,
 } from "../../redux/slices/basketSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store.ts";
 
-const Product = (props) => {
-	const basketLS = useSelector((state) => state.basketStore.basketLS);
+type TProps = {
+	id: number;
+	title: string;
+	price: number;
+	image: string;
+};
+
+const Product = (props: TProps) => {
+	const basketLS = useSelector(
+		(state: RootState) => state.basketStore.basketLS
+	);
 
 	const { title, price, image, id } = props;
 
@@ -17,6 +27,7 @@ const Product = (props) => {
 	const [productCount, setProductCount] = useState(0);
 
 	const findProductFromBasket = basketLS.find((item) => item.id == id);
+
 	useEffect(() => {
 		if (findProductFromBasket) {
 			setProductCount(findProductFromBasket.count);

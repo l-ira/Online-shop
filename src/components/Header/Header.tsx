@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,12 +7,13 @@ import {
 	setSearchWord,
 } from "../../redux/slices/productsSlice.ts";
 import { IoCartOutline } from "react-icons/io5";
+import { RootState } from "../../redux/store.ts";
 
 const Header = (): React.FC => {
 	const dispatch = useDispatch();
 
 	const basketCount = useSelector(
-		(state) => state.basketStore.totalBasketCount
+		(state: RootState) => state.basketStore.totalBasketCount
 	);
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
